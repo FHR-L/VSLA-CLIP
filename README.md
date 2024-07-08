@@ -57,7 +57,7 @@ CUDA_VISIBLE_DEVICES=0 python test.py --config_file 'your_config_file' TEST.WEIG
 
 ### Citation
 ```
-is coming!
+is coming!!
 ```
 
 ### Acknowledgement
