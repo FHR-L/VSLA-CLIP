@@ -1,0 +1,81 @@
+MODEL:
+  PRETRAIN_CHOICE: 'imagenet'
+  METRIC_LOSS_TYPE: 'triplet'
+  IF_LABELSMOOTH: 'on'
+  IF_WITH_CENTER: 'no'
+  NAME: 'ViT-B-16'
+  STRIDE_SIZE: [16, 16]
+  ID_LOSS_WEIGHT : 0.25  # ID LOSS
+  TRIPLET_LOSS_WEIGHT : 1.0 # Triplet LOSS
+  I2T_LOSS_WEIGHT : 1.0 # i2t_ce_loss
+  I2T_WEIGHT: 1.0 # i2t_loss
+  T2I_WEIGHT: 1.0 # t2i_loss
+  VIFI_WEIGHT : '/home/Newdisk/luowenlong/Projects/ViFi-weight/vifi_weight.pth'
+  USE_VIFI_WEIGHT : True
+  PBP_CAMERA: False
+  USE_ADAPTER: False
+
+INPUT:
+  SIZE_TRAIN: [256, 128]
+  SIZE_TEST: [256, 128]
+  PROB: 0.5 # random horizontal flip
+  RE_PROB: 0.5 # random erasing
+  PADDING: 10
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+
+DATALOADER:
+  SAMPLER: 'softmax_triplet'
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 8
+  SEQ_LEN: 8
+
+SOLVER:
+  STAGE1:
+    IMS_PER_BATCH: 64
+    OPTIMIZER_NAME: "Adam"
+    BASE_LR: 0.00035
+    WARMUP_LR_INIT: 0.00001
+    LR_MIN: 1e-6
+    WARMUP_METHOD: 'linear'
+    WEIGHT_DECAY: 1e-4
+    WEIGHT_DECAY_BIAS: 1e-4
+    MAX_EPOCHS: 120
+    CHECKPOINT_PERIOD: 120
+    LOG_PERIOD: 10
+    WARMUP_EPOCHS: 5
+
+  STAGE2:
+    IMS_PER_BATCH: 32
+    OPTIMIZER_NAME: "Adam"
+    BASE_LR: 0.000005
+    WARMUP_METHOD: 'linear'
+    WARMUP_ITERS: 10
+    WARMUP_FACTOR: 0.1
+    WEIGHT_DECAY:  0.00025
+    WEIGHT_DECAY_BIAS: 0.0001
+    LARGE_FC_LR: False
+    MAX_EPOCHS: 120
+    CHECKPOINT_PERIOD: 120
+    LOG_PERIOD: 50
+    EVAL_PERIOD: 10
+    BIAS_LR_FACTOR: 2
+
+    STEPS: [60, 90]
+    GAMMA: 0.1
+
+TEST:
+  EVAL: True
+  IMS_PER_BATCH: 16
+  RE_RANKING: False
+  WEIGHT: ''
+  NECK_FEAT: 'before'
+  FEAT_NORM: 'yes'
+  ALL_FRAMES: False
+  DISTANCE: 'cosine'
+
+DATASETS:
+  NAMES: ('lsvid')
+  ROOT_DIR: ('/home/Newdisk/luowenlong/Datasets/LS-VID/')
+OUTPUT_DIR: 'output/ft/ls/ce_I2t_t2i_id_tri'
+
