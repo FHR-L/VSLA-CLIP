@@ -57,7 +57,12 @@ CUDA_VISIBLE_DEVICES=0 python test.py --config_file 'your_config_file' TEST.WEIG
 
 ### Citation
 ```
-is coming!!!
+@inproceedings{vsla-clip,
+ author = {S. Zhang and W. Luo and D. Cheng and Q. Yang and L. Ran and Y. Xing and Y. Zhang},
+ title  = {Cross-Platform Video Person ReID: A New Benchmark Dataset and Adaptation Approach},
+ year   = {2024},
+ booktitle = {ECCV}
+}
 ```
 
 ### Acknowledgement
