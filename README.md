@@ -57,11 +57,13 @@ CUDA_VISIBLE_DEVICES=0 python test.py --config_file 'your_config_file' TEST.WEIG
 
 ### Citation
 ```
-@inproceedings{vsla-clip,
- author = {S. Zhang and W. Luo and D. Cheng and Q. Yang and L. Ran and Y. Xing and Y. Zhang},
- title  = {Cross-Platform Video Person ReID: A New Benchmark Dataset and Adaptation Approach},
- year   = {2024},
- booktitle = {ECCV}
+@inproceedings{zhang2024cross,
+  title={Cross-platform video person reid: A new benchmark dataset and adaptation approach},
+  author={Zhang, Shizhou and Luo, Wenlong and Cheng, De and Yang, Qingchun and Ran, Lingyan and Xing, Yinghui and Zhang, Yanning},
+  booktitle={European Conference on Computer Vision},
+  pages={270--287},
+  year={2024},
+  organization={Springer}
 }
 ```
 
